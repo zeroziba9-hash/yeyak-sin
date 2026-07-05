@@ -13,15 +13,25 @@ datasource db {
 }
 
 model Restaurant {
-  id        Int      @id @default(autoincrement())
-  name      String
-  category  String
-  address   String
-  lat       Float
-  lng       Float
-  waiting   Int      @default(0)
-  createdAt DateTime @default(now())
-  reviews   Review[]
+  id           Int           @id @default(autoincrement())
+  name         String
+  category     String
+  address      String
+  lat          Float
+  lng          Float
+  waiting      Int           @default(0)
+  createdAt    DateTime      @default(now())
+  reviews      Review[]
+  chatMessages ChatMessage[]
+}
+
+model ChatMessage {
+  id           Int        @id @default(autoincrement())
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+  sender       String // "user" | "owner"
+  content      String
+  createdAt    DateTime   @default(now())
 }
 
 model Review {

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import WaitingPanel from "@/components/WaitingPanel";
 import ReviewSection from "@/components/ReviewSection";
+import ChatPanel from "@/components/ChatPanel";
 
 export default async function RestaurantDetail({
   params,
@@ -46,6 +47,8 @@ export default async function RestaurantDetail({
       </div>
 
       <WaitingPanel restaurantId={restaurant.id} initialWaiting={restaurant.waiting} />
+
+      <ChatPanel restaurantId={restaurant.id} />
 
       <ReviewSection
         restaurantId={restaurant.id}
