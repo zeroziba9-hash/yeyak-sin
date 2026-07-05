@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import WaitingPanel from "@/components/WaitingPanel";
 import ReviewSection from "@/components/ReviewSection";
 import ChatPanel from "@/components/ChatPanel";
+import FavoriteButton from "@/components/FavoriteButton";
 
 export default async function RestaurantDetail({
   params,
@@ -36,9 +37,12 @@ export default async function RestaurantDetail({
       </Link>
 
       <div className="glass-card mt-4 rounded-2xl p-5 shadow-sm">
-        <span className="rounded-full bg-purple-100 px-2.5 py-1 text-xs font-bold text-purple-700">
-          {restaurant.category}
-        </span>
+        <div className="flex items-start justify-between">
+          <span className="rounded-full bg-purple-100 px-2.5 py-1 text-xs font-bold text-purple-700">
+            {restaurant.category}
+          </span>
+          <FavoriteButton restaurantId={restaurant.id} />
+        </div>
         <h1 className="mt-2 text-2xl font-extrabold text-zinc-800">
           {restaurant.name}
         </h1>
