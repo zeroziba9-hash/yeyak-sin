@@ -32,6 +32,12 @@ export default function RestaurantMap({
   const [sdkLoaded, setSdkLoaded] = useState(false);
 
   useEffect(() => {
+    // next/script only fires onLoad once per page load; if this component
+    // remounts (e.g. navigating back) the SDK is already on window.
+    if (window.kakao?.maps) setSdkLoaded(true);
+  }, []);
+
+  useEffect(() => {
     if (!sdkLoaded || !mapRef.current) return;
 
     window.kakao.maps.load(() => {
