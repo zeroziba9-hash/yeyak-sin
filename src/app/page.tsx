@@ -8,9 +8,11 @@ export default async function Home() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <header className="border-b border-zinc-200 px-6 py-4">
-        <h1 className="text-xl font-bold">예약의 신 🍽️</h1>
-        <p className="text-sm text-zinc-500">
+      <header className="glass-card border-b border-white/60 px-6 py-5 shadow-sm">
+        <h1 className="gradient-text text-2xl font-extrabold tracking-tight">
+          예약의 신 🍽️
+        </h1>
+        <p className="text-sm font-medium text-zinc-500">
           내 주변 음식점 실시간 웨이팅 확인
         </p>
       </header>

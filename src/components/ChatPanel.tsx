@@ -55,22 +55,28 @@ export default function ChatPanel({ restaurantId }: { restaurantId: number }) {
   };
 
   return (
-    <div className="mt-8 rounded-lg border border-zinc-200">
-      <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-3">
-        <h2 className="text-lg font-bold">실시간 상담</h2>
-        <div className="flex gap-1 rounded-full bg-zinc-100 p-1 text-xs">
+    <div className="glass-card mt-4 overflow-hidden rounded-2xl shadow-sm">
+      <div className="flex items-center justify-between border-b border-white/60 px-4 py-3">
+        <h2 className="flex items-center gap-1.5 text-lg font-bold text-zinc-800">
+          💬 실시간 상담
+        </h2>
+        <div className="flex gap-1 rounded-full bg-zinc-100/80 p-1 text-xs">
           <button
             onClick={() => setRole("user")}
-            className={`rounded-full px-3 py-1 font-medium ${
-              role === "user" ? "bg-black text-white" : "text-zinc-500"
+            className={`rounded-full px-3 py-1 font-semibold transition-all ${
+              role === "user"
+                ? "gradient-brand text-white shadow-sm"
+                : "text-zinc-500"
             }`}
           >
             고객으로 보기
           </button>
           <button
             onClick={() => setRole("owner")}
-            className={`rounded-full px-3 py-1 font-medium ${
-              role === "owner" ? "bg-black text-white" : "text-zinc-500"
+            className={`rounded-full px-3 py-1 font-semibold transition-all ${
+              role === "owner"
+                ? "gradient-brand text-white shadow-sm"
+                : "text-zinc-500"
             }`}
           >
             사장님으로 보기
@@ -90,13 +96,13 @@ export default function ChatPanel({ restaurantId }: { restaurantId: number }) {
             className={`flex ${m.sender === role ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-[70%] rounded-2xl px-3 py-2 text-sm ${
+              className={`max-w-[70%] rounded-2xl px-3 py-2 text-sm shadow-sm ${
                 m.sender === role
-                  ? "bg-black text-white"
-                  : "bg-zinc-100 text-zinc-800"
+                  ? "gradient-brand text-white"
+                  : "bg-white/90 text-zinc-800"
               }`}
             >
-              <p className="mb-0.5 text-[10px] opacity-60">
+              <p className="mb-0.5 text-[10px] opacity-70">
                 {m.sender === "owner" ? "사장님" : "고객"}
               </p>
               {m.content}
@@ -106,16 +112,16 @@ export default function ChatPanel({ restaurantId }: { restaurantId: number }) {
         <div ref={bottomRef} />
       </div>
 
-      <form onSubmit={send} className="flex gap-2 border-t border-zinc-200 p-3">
+      <form onSubmit={send} className="flex gap-2 border-t border-white/60 p-3">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={role === "user" ? "문의할 내용을 입력하세요" : "답변을 입력하세요"}
-          className="flex-1 rounded border border-zinc-300 px-3 py-2 text-sm"
+          className="flex-1 rounded-full border border-zinc-200 bg-white/80 px-4 py-2 text-sm focus:border-purple-400 focus:outline-none"
         />
         <button
           type="submit"
-          className="rounded bg-black px-4 py-2 text-sm font-medium text-white"
+          className="gradient-brand rounded-full px-4 py-2 text-sm font-semibold text-white shadow-md shadow-purple-500/30 transition-transform hover:scale-105"
         >
           전송
         </button>

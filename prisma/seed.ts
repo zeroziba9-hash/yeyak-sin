@@ -26,6 +26,7 @@ const restaurants = [
 ];
 
 async function main() {
+  await prisma.chatMessage.deleteMany();
   await prisma.review.deleteMany();
   await prisma.restaurant.deleteMany();
 

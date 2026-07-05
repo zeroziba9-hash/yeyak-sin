@@ -45,21 +45,26 @@ export default function ReviewSection({
   };
 
   return (
-    <div className="mt-8">
-      <h2 className="text-lg font-bold">리뷰 {reviews.length}개</h2>
+    <div className="mt-4">
+      <h2 className="text-lg font-bold text-zinc-800">
+        리뷰 <span className="gradient-text">{reviews.length}</span>개
+      </h2>
 
-      <form onSubmit={submit} className="mt-3 flex flex-col gap-2 rounded-lg border border-zinc-200 p-4">
+      <form
+        onSubmit={submit}
+        className="glass-card mt-3 flex flex-col gap-2 rounded-2xl p-4 shadow-sm"
+      >
         <div className="flex gap-2">
           <input
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
             placeholder="닉네임"
-            className="flex-1 rounded border border-zinc-300 px-3 py-2 text-sm"
+            className="flex-1 rounded-full border border-zinc-200 bg-white/80 px-4 py-2 text-sm focus:border-purple-400 focus:outline-none"
           />
           <select
             value={rating}
             onChange={(e) => setRating(Number(e.target.value))}
-            className="rounded border border-zinc-300 px-3 py-2 text-sm"
+            className="rounded-full border border-zinc-200 bg-white/80 px-3 py-2 text-sm focus:border-purple-400 focus:outline-none"
           >
             {[5, 4, 3, 2, 1].map((n) => (
               <option key={n} value={n}>
@@ -72,24 +77,24 @@ export default function ReviewSection({
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="리뷰 내용을 남겨주세요"
-          className="rounded border border-zinc-300 px-3 py-2 text-sm"
+          className="rounded-2xl border border-zinc-200 bg-white/80 px-4 py-2 text-sm focus:border-purple-400 focus:outline-none"
           rows={2}
         />
         <button
           type="submit"
           disabled={submitting}
-          className="self-end rounded bg-black px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+          className="gradient-brand self-end rounded-full px-4 py-2 text-sm font-semibold text-white shadow-md shadow-purple-500/30 transition-transform hover:scale-105 disabled:opacity-50"
         >
           리뷰 등록
         </button>
       </form>
 
-      <ul className="mt-4 flex flex-col gap-3">
+      <ul className="mt-4 flex flex-col gap-2">
         {reviews.map((r) => (
-          <li key={r.id} className="rounded-lg border border-zinc-100 p-3">
+          <li key={r.id} className="glass-card rounded-2xl p-3 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="font-medium">{r.nickname}</span>
-              <span className="text-amber-600">{"★".repeat(r.rating)}</span>
+              <span className="font-semibold text-zinc-800">{r.nickname}</span>
+              <span className="text-amber-500">{"★".repeat(r.rating)}</span>
             </div>
             <p className="mt-1 text-sm text-zinc-600">{r.content}</p>
           </li>

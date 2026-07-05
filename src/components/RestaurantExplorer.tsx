@@ -35,15 +35,15 @@ export default function RestaurantExplorer({
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
-      <div className="flex gap-2 overflow-x-auto border-b border-zinc-200 px-6 py-3">
+      <div className="glass-card flex gap-2 overflow-x-auto border-b border-white/60 px-6 py-3">
         {CATEGORIES.map((c) => (
           <button
             key={c}
             onClick={() => setCategory(c)}
-            className={`shrink-0 rounded-full px-3 py-1 text-sm font-medium transition-colors ${
+            className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-semibold transition-all duration-200 ${
               category === c
-                ? "bg-black text-white"
-                : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+                ? "gradient-brand text-white shadow-md shadow-purple-500/30"
+                : "bg-white/70 text-zinc-600 hover:bg-white hover:shadow-sm"
             }`}
           >
             {c}
@@ -51,38 +51,44 @@ export default function RestaurantExplorer({
         ))}
       </div>
       <div className="flex flex-1 overflow-hidden">
-        <aside className="w-80 shrink-0 overflow-y-auto border-r border-zinc-200">
-          {filtered.map((r) => (
-            <Link
-              key={r.id}
-              href={`/restaurants/${r.id}`}
-              className="flex items-center justify-between border-b border-zinc-100 px-4 py-3 hover:bg-zinc-50"
-            >
-              <div>
-                <p className="font-medium">{r.name}</p>
-                <p className="text-xs text-zinc-500">
-                  {r.category} · {r.address}
-                </p>
-              </div>
-              <span
-                className={`shrink-0 rounded-full px-2 py-1 text-xs font-semibold ${
-                  r.waiting > 0
-                    ? "bg-orange-100 text-orange-700"
-                    : "bg-green-100 text-green-700"
-                }`}
+        <aside className="w-80 shrink-0 overflow-y-auto p-3">
+          <div className="flex flex-col gap-2">
+            {filtered.map((r) => (
+              <Link
+                key={r.id}
+                href={`/restaurants/${r.id}`}
+                className="glass-card group flex items-center justify-between rounded-2xl px-4 py-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-purple-500/10"
               >
-                {r.waiting > 0 ? `대기 ${r.waiting}팀` : "바로입장"}
-              </span>
-            </Link>
-          ))}
-          {filtered.length === 0 && (
-            <p className="p-4 text-sm text-zinc-400">
-              해당 카테고리의 음식점이 없습니다.
-            </p>
-          )}
+                <div>
+                  <p className="font-semibold text-zinc-800 transition-colors group-hover:text-purple-700">
+                    {r.name}
+                  </p>
+                  <p className="text-xs text-zinc-500">
+                    {r.category} · {r.address}
+                  </p>
+                </div>
+                <span
+                  className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ${
+                    r.waiting > 0
+                      ? "bg-orange-100 text-orange-700"
+                      : "bg-emerald-100 text-emerald-700"
+                  }`}
+                >
+                  {r.waiting > 0 ? `대기 ${r.waiting}팀` : "바로입장"}
+                </span>
+              </Link>
+            ))}
+            {filtered.length === 0 && (
+              <p className="p-4 text-sm text-zinc-400">
+                해당 카테고리의 음식점이 없습니다.
+              </p>
+            )}
+          </div>
         </aside>
-        <main className="flex-1">
-          <RestaurantMap restaurants={filtered} kakaoKey={kakaoKey} />
+        <main className="flex-1 p-3 pl-0">
+          <div className="h-full w-full overflow-hidden rounded-2xl shadow-lg shadow-purple-500/10">
+            <RestaurantMap restaurants={filtered} kakaoKey={kakaoKey} />
+          </div>
         </main>
       </div>
     </div>
